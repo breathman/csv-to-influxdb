@@ -237,6 +237,10 @@ func main() {
 					continue
 				}
 				fields[h] = t
+			} else if conf.TimestampColumn == h && conf.TimestampFormat == "unix" {
+				tt, _ := strconv.Atoi(r)
+				ts = time.Unix(0, int64(tt))
+				continue
 			} else if !conf.ForceFloat && !conf.ForceString && integerRe.MatchString(r) {
 				i, _ := strconv.Atoi(r)
 				fields[h] = i
